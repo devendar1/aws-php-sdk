@@ -1,31 +1,20 @@
 <?php
+
+
 require 'vendor/autoload.php';
 
-use Aws\Common\Aws;
-use Aws\Credentials\Credentials;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
-use Aws\Signature\SignatureV4;
+use Aws\Ec2\Ec2Client;
 
-$access_key = 'AKIARMTAE6QXH3IJEKVA';
-$secret_key = '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';
-$url = 'aws/service/global-infrastructure/services/acm';
-$region = 'us-west-2';
+$ec2Client = new Aws\Ec2\Ec2Client([
+    'region' => 'us-west-2',
+    'version' => 'latest',
+    'profile' => 'default',
+    'request.options' => ['proxy' => '193.56.47.20:8080']
+]);
 
-$credentials = new Credentials($access_key, $secret_key);
-var_dump($credentials);
+$result = $ec2Client->describeRegions();
+// var_dump($result["Regions"][0]);
 
-$client = new Client();
-$request = new Request('GET', $url);
-var_dump($request);
-
-$s4 = new SignatureV4("execute-api", $region);
-$s4 = new SignatureV4("execute-api", "us-east-1");
-$s4->signRequest($request, $credentials);
-var_dump($s4);
-var_dump($request);
-
-$response = $client->send($request);
 ?>
 
 <!DOCTYPE html>
@@ -38,16 +27,21 @@ $response = $client->send($request);
 	<table>
 		<thead>
 		<tr>
-			<th>File</th>
-			<th>Download</th>
+			<th>Region name</th>
+			<th>End point</th>
 		</tr>
 	</thead>
 	<tbody>
-		
+		<!-- var_dump($result["Regions"][0]); -->
+		  <?php foreach($result["Regions"] as $region): ?>
+
+		  	<?php var_dump($region); ?>
+		 
 			<tr>
-				<td></td>
-				<td></td>
+				<td><?php echo $region["RegionName"]; ?></td>&nspb&nspb&nspb&nspb&nspb&nspb&nspb
+				<td><?php echo $region["Endpoint"]; ?></td>
 			</tr>
+		  <?php endforeach;?>
 	</tbody>
 	</table>
 

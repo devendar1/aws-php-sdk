@@ -1,18 +1,14 @@
 <?php 
+
 use Aws\S3\S3Client;
 require 'app/start.php';
-// use Aws\Exception\AwsException;
-// $objects= $s3->getIterator('ListObjects',[
-// 		'Bucket' => $config['s3']['bucket']
-// ]);
+
+use Aws\Exception\AwsException;
+$objects= $s3->getIterator('ListObjects',[
+		'Bucket' => $config['s3']['bucket']
+]);
 
 
-
-$options = [
-    'region'            => 'us-west-2',
-    'version'           => '2006-03-01',
-    'signature_version' => 'v4'
-];
 
 $s3Client = new S3Client($options);
 var_dump(s3Client);
