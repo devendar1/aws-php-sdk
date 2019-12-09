@@ -9,9 +9,6 @@ $objects= $s3->getIterator('ListObjects',[
 ]);
 
 
-
-$s3Client = new S3Client($options);
-var_dump(s3Client);
 ?>
 
 <!DOCTYPE html>

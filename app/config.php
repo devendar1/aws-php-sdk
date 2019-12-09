@@ -2,8 +2,7 @@
 
 	return [
 		's3' => [
-			'key' => '',
-			'secret' => '',
+			'profile' =>'default',
 			'bucket' => 'testaws.bucket.com.s3-us-west-2.amazonaws.com'
 		]
 
