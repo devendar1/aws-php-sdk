@@ -1,19 +1,19 @@
 <?php
 
 require 'vendor/autoload.php';
-
 use Aws\Ec2\Ec2Client;
 
+static $resultAvailability;
+
 $ec2Client = new Aws\Ec2\Ec2Client([
-	'request.options' => ['proxy' => '193.56.47.20:8080'],
     'region' => 'us-west-2',
     'version' => 'latest',
     'profile' => 'default'   
 ]);
-
 $result = $ec2Client->describeRegions();
 
 // var_dump($result ["Regions"]);
+// exit();
 
 foreach ($result["Regions"] as $region){
 
@@ -23,16 +23,12 @@ $ec2Client = new Aws\Ec2\Ec2Client([
     'profile' => 'default'
 ]);
 
-
-
-$resultAvailability = $ec2Client->describeAvailabilityZones();
+$resultAvailability[] = $ec2Client->describeAvailabilityZones();
 }
+
+$size = count($resultAvailability);
+// echo $size;
 // var_dump($resultAvailability);
-
-
- 
- 
-
 ?>
 
 <!DOCTYPE html>
@@ -50,16 +46,15 @@ $resultAvailability = $ec2Client->describeAvailabilityZones();
 		</tr>
 	</thead>
 	<tbody>
-		<!-- var_dump($result["Regions"][0]); -->
-		  <?php foreach($resultAvailability["AvailabilityZones"] as $AvailabilityZone): ?>
-
-		  	<!-- <?php var_dump($region); ?> -->
-		 
+		  <?php for($i=0;$i< $size; $i++):?>
+		  <?php foreach($resultAvailability[$i]["AvailabilityZones"] as $AvailabilityZone): ?>
 			<tr>
-				<td><?php echo $AvailabilityZone["RegionName"]; ?></td>
+				<td><?php echo $AvailabilityZone['RegionName']; ?></td>
 				<td><?php echo $AvailabilityZone["ZoneName"]; ?></td>
 			</tr>
-		  <?php endforeach;?>
+			<!-- <?php  var_dump($AvailabilityZone)?> -->
+		  <?php endforeach; ?>		 
+		  <?php endfor;?>
 	</tbody>
 	</table>
 
