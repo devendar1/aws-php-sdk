@@ -15,14 +15,13 @@ $result = $ec2Client->describeRegions();
 // var_dump($result ["Regions"]);
 // exit();
 
-foreach ($result["Regions"] as $region){
-
+foreach ($result["Regions"] as $region)
+{
 $ec2Client = new Aws\Ec2\Ec2Client([
     'region' => $region["RegionName"],
     'version' => 'latest',
     'profile' => 'default'
 ]);
-
 $resultAvailability[] = $ec2Client->describeAvailabilityZones();
 }
 
