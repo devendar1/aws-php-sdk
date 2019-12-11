@@ -56,5 +56,4 @@ $size = count($resultAvailability);
 		  <?php endfor;?>
 	</tbody>
 	</table>
-
 </body>
