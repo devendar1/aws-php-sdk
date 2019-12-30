@@ -28,6 +28,24 @@ $resultAvailability[] = $ec2Client->describeAvailabilityZones();
 $size = count($resultAvailability);
 // echo $size;
 // var_dump($resultAvailability);
+// $result1 = $ec2Client->describeImages();
+// var_dump($result1);
+// exit();
+
+// $result = $ec2Client->describeVolumes([
+//     'DryRun' => true,
+//     'Filters' => [
+//         [
+//             'Name' => 'name',
+//             'Values' => [],
+//         ],
+//     ],
+//     'MaxResults' => 2,
+// ]);
+
+// var_dump($result);
+// exit();
+
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +59,7 @@ $size = count($resultAvailability);
 		<thead>
 		<tr>
 			<th>Region name</th>
+			
 			<th>Availablity Zones</th>
 		</tr>
 	</thead>
@@ -49,6 +68,7 @@ $size = count($resultAvailability);
 		  <?php foreach($resultAvailability[$i]["AvailabilityZones"] as $AvailabilityZone): ?>
 			<tr>
 				<td><?php echo $AvailabilityZone['RegionName']; ?></td>
+				
 				<td><?php echo $AvailabilityZone["ZoneName"]; ?></td>
 			</tr>
 			<!-- <?php  var_dump($AvailabilityZone)?> -->

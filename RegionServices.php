@@ -20,26 +20,31 @@ $result = $client->describeServices();
 // ]);
 
 //  var_dump($result["Services"][0]);
-echo '<h1>'. 'ServiceCode'.'</h1>';
-foreach($result["Services"] as $service)
- {
-    echo $service["ServiceCode"] .'<br/>'."\n";
- }
+// echo '<h1>'. 'ServiceCode'.'</h1>';
+// foreach($result["Services"] as $service)
+//  {
+//     echo $service["ServiceCode"] .'<br/>'."\n";
+//  }
 // exit();
 
-// $resultProduct = $client->getProducts([
-//     'Filters' => [
-//         [
-//             'Field' => 'ServiceCode',
-//             'Type' => 'TERM_MATCH',
-//             'Value' => 'AmazonEC2',
-//         ]
-//     ],
-//     'FormatVersion' => 'aws_v1',
-//     'MaxResults' => 1,
-// ]);
+$resultProduct = $client->getProducts([
+    'Filters' => [
+        [
+            'Field' => 'ServiceCode',
+            'Type' => 'TERM_MATCH',
+            'Value' => 'AmazonEC2',
+        ],
+        [
+            'Field' => 'volumeType',
+            'Type' => 'TERM_MATCH',
+            'Value' => 'Provisioned IOPS',
+        ],
+    ],
+    'FormatVersion' => 'aws_v1',
+    'MaxResults' => 1
+]);
 
-//     var_dump($resultProduct);
-//     exit();
+    var_dump($resultProduct);
+    exit();
 
 ?>
