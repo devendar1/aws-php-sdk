@@ -19,7 +19,10 @@ $result = $client->describeServices();
 //     'ServiceCode' => 'AmazonEC2',
 // ]);
 
-//  var_dump($result["Services"][0]);
+ var_dump($result["Services"][0]);
+$size= count($result["Services"]);
+
+echo $size;
 // echo '<h1>'. 'ServiceCode'.'</h1>';
 // foreach($result["Services"] as $service)
 //  {
@@ -27,24 +30,24 @@ $result = $client->describeServices();
 //  }
 // exit();
 
-$resultProduct = $client->getProducts([
-    'Filters' => [
-        [
-            'Field' => 'ServiceCode',
-            'Type' => 'TERM_MATCH',
-            'Value' => 'AmazonEC2',
-        ],
-        [
-            'Field' => 'volumeType',
-            'Type' => 'TERM_MATCH',
-            'Value' => 'Provisioned IOPS',
-        ],
-    ],
-    'FormatVersion' => 'aws_v1',
-    'MaxResults' => 1
-]);
+// $resultProduct = $client->getProducts([
+//     'Filters' => [
+//         [
+//             'Field' => 'ServiceCode',
+//             'Type' => 'TERM_MATCH',
+//             'Value' => 'AmazonEC2',
+//         ],
+//         [
+//             'Field' => 'volumeType',
+//             'Type' => 'TERM_MATCH',
+//             'Value' => 'Provisioned IOPS',
+//         ],
+//     ],
+//     'FormatVersion' => 'aws_v1',
+//     'MaxResults' => 1
+// ]);
 
-    var_dump($resultProduct);
-    exit();
+//     var_dump($resultProduct);
+//     exit();
 
 ?>
