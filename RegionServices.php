@@ -19,16 +19,16 @@ $result = $client->describeServices();
 //     'ServiceCode' => 'AmazonEC2',
 // ]);
 
- var_dump($result["Services"][0]);
+//  var_dump($result["Services"][0]);
 $size= count($result["Services"]);
 
 echo $size;
-// echo '<h1>'. 'ServiceCode'.'</h1>';
-// foreach($result["Services"] as $service)
-//  {
-//     echo $service["ServiceCode"] .'<br/>'."\n";
-//  }
-// exit();
+echo '<h1>'. 'ServiceCode'.'</h1>';
+foreach($result["Services"] as $service)
+ {
+    echo $service["ServiceCode"] .'<br/>'."\n";
+ }
+exit();
 
 // $resultProduct = $client->getProducts([
 //     'Filters' => [
@@ -49,5 +49,3 @@ echo $size;
 
 //     var_dump($resultProduct);
 //     exit();
-
-?>
